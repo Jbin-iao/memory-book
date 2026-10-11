@@ -33,4 +33,10 @@ URL, legacy map URL, photos, map rendering and refresh persistence.
   import, invalid import atomicity, quota preservation and legacy migration.
 - Desktop browser: empty state, image and map loading, photo upload, save,
   refresh persistence, editing, deletion, export and import passed.
-- Mobile viewport checks and deployment result are recorded after final QA.
+- Local and live Chrome checks passed at 1440, 390 and 320 CSS pixels, including
+  mobile editor layout and rendered map canvas pixels. Screenshots were reviewed.
+- The live site passed photo upload, save, refresh, edit, delete, export/import
+  and legacy map redirect checks with no script errors or failed HTTP resources.
+- Published at https://jbin-iao.github.io/memory-book/ with HTTPS enforced.
+- Repository: https://github.com/Jbin-iao/memory-book .
+- Local verification reports and screenshots are in `artifacts/` (not uploaded).

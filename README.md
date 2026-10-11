@@ -1,5 +1,7 @@
 # Memory Book
 
+Live site: https://jbin-iao.github.io/memory-book/
+
 A personal memory journal with photos, a timeline and a province-level map.
 Records stay in the current browser. There is no account system or cloud sync.
 JSON export/import includes photos and can transfer records between devices.
