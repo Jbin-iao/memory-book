@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9f8">
+  <title>Memory Book · 记忆册</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/book-open.svg">
+  <link rel="stylesheet" href="./assets/css/journal.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="./love-story.html" aria-label="Memory Book 记忆册首页"><span class="brand-mark"><i data-lucide="book-open"></i></span><span>Memory Book<small>记忆册</small></span></a>
+    <div class="nav-label">我的收藏</div>
+    <nav aria-label="主导航">
+      <a href="#recent" aria-current="location"><i data-lucide="images"></i><span>最近记录</span><span class="nav-dot"></span></a>
+      <a href="#timeline"><i data-lucide="history"></i><span>时间线</span></a>
+      <a href="#footprints"><i data-lucide="map-pin"></i><span>足迹地图</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <p class="sidebar-note">平凡的日子，<br>也有值得珍藏的瞬间。</p>
+      <div class="backup-tools"><button id="export" title="导出备份" aria-label="导出备份"><i data-lucide="download"></i><span>导出备份</span></button><button id="import" title="导入备份" aria-label="导入备份"><i data-lucide="upload"></i><span>导入备份</span></button></div>
+      <input type="file" id="backup" accept="application/json,.json" hidden>
+      <small class="storage-label"><i data-lucide="hard-drive"></i>保存于当前浏览器</small>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span class="breadcrumb">我的记忆册 <span>/</span> 日常收藏</span><button class="primary" data-new><i data-lucide="plus"></i>记一笔</button></header>
+    <main>
+      <section class="welcome" aria-labelledby="welcome-title"><div><p class="eyebrow">每一刻，都值得</p><h1 id="welcome-title">日子，慢慢收藏。</h1><p class="muted">一个人的日常，或一群人的好时光。</p></div><div class="welcome-stamp" aria-hidden="true"><i data-lucide="heart"></i><span>留住此刻</span></div></section>
+      <p id="notice" role="status" aria-live="polite"></p>
+      <section id="recent" aria-labelledby="recent-title">
+        <div class="section-heading"><div class="heading-group"><span class="section-number">01</span><h2 id="recent-title">最近记录</h2><span id="count" class="count"></span></div><button class="text-button" data-new><i data-lucide="plus"></i>留下一段回忆</button></div>
+        <div id="recent-list" class="photo-grid"></div>
+      </section>
+      <section id="timeline" aria-labelledby="timeline-title"><div class="section-heading"><div class="heading-group"><span class="section-number">02</span><h2 id="timeline-title">时间线</h2></div><span class="muted">按日子，重温每一刻</span></div><div id="timeline-list"></div></section>
+      <section id="footprints" aria-labelledby="footprints-title"><div class="section-heading"><div class="heading-group"><span class="section-number">03</span><h2 id="footprints-title">足迹地图</h2></div><span id="place-count" class="count"></span></div><div class="map-layout"><div><div id="map" aria-label="记录地点地图"><div class="map-placeholder"><i data-lucide="map"></i><span>足迹正在展开</span></div></div><p id="map-status" class="muted" role="status">地图加载中</p></div><div class="places"><label for="place-filter">走过的地方</label><select id="place-filter"><option value="">全部地点</option></select><div id="place-list"></div></div></div></section>
+      <footer><span>Memory Book <span class="footer-dot">·</span> 记忆册</span><span>把小小的日常，留成久久的回忆。</span></footer>
+    </main>
+  </div>
+  <template id="empty-records"><div class="empty"><div class="empty-photo"><img src="./assets/memory-cover.jpg" alt="阳光穿过绿意盎然的树林" width="700" height="467"><span>A LITTLE MOMENT</span></div><div class="empty-copy"><span class="empty-kicker">故事从今天开始</span><h3>为平凡的一天，留一页。</h3><p>此刻的心情、沿途的风景，<br>还有想要记住的人。</p><button class="primary" data-empty-new><i data-lucide="plus"></i>写下第一段回忆</button></div><span class="empty-page" aria-hidden="true">01</span></div></template>
+  <dialog id="editor" aria-labelledby="editor-title">
+    <form id="entry-form"><div class="section-heading"><div><p class="eyebrow">留住这一刻</p><h2 id="editor-title">记一笔</h2></div><button type="button" id="cancel" class="icon-button" aria-label="关闭" title="关闭"><i data-lucide="x"></i></button></div>
+      <label for="photos">照片 <span class="muted">最多 3 张 · 每张不超过 15 MB</span></label><input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple><div id="preview"></div>
+      <label for="words">今天的故事</label><textarea id="words" maxlength="2000" rows="4" required placeholder="今天有什么值得留下？"></textarea>
+      <div class="fields"><div><label for="date">日期</label><input id="date" type="date" required></div><div><label for="place">地点</label><select id="place" required><option value="">选择省份或城市</option></select></div></div>
+      <label for="spot">具体地点 <span class="muted">选填</span></label><input id="spot" maxlength="100" placeholder="例如：西湖边的小咖啡馆"><p id="form-error" role="alert"></p><div class="form-actions"><button type="button" id="delete" class="danger" hidden><i data-lucide="trash-2"></i>删除记录</button><button type="submit" class="primary" id="save"><i data-lucide="check"></i>保存回忆</button></div>
+    </form>
+  </dialog>
+  <script src="./assets/js/lucide.min.js"></script>
+  <script src="./assets/js/record-store.js"></script>
+  <script src="./assets/js/journal.js"></script>
+</body>
+</html>

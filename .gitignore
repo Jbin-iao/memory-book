@@ -1,0 +1,22 @@
+# 清理备份（确认页面正常后可删除）
+.trash-dead-code/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 日志与临时文件
+*.log
+*.tmp
+
+# Generated release and browser verification artifacts
+dist/
+artifacts/
+.publish/
