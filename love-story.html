@@ -15,6 +15,7 @@
     <nav aria-label="主导航">
       <a href="#recent" aria-current="location"><i data-lucide="images"></i><span>最近记录</span><span class="nav-dot"></span></a>
       <a href="#timeline"><i data-lucide="history"></i><span>时间线</span></a>
+      <a href="#calendar"><i data-lucide="calendar-days"></i><span>日历</span></a>
       <a href="#footprints"><i data-lucide="map-pin"></i><span>足迹地图</span></a>
     </nav>
     <div class="sidebar-bottom">
@@ -29,11 +30,18 @@
     <main>
       <section class="welcome" aria-labelledby="welcome-title"><div><p class="eyebrow">每一刻，都值得</p><h1 id="welcome-title">日子，慢慢收藏。</h1><p class="muted">一个人的日常，或一群人的好时光。</p></div><div class="welcome-stamp" aria-hidden="true"><i data-lucide="heart"></i><span>留住此刻</span></div></section>
       <p id="notice" role="status" aria-live="polite"></p>
+      <div class="sync-bar"><span id="sync-status" role="status" aria-live="polite">正在读取保存状态…</span><div><a href="./auth-modern.html">账号</a><button id="sync-retry" type="button" hidden>重试同步</button></div></div>
+      <div id="draft-banner" class="draft-banner" hidden><span>有一段尚未完成的回忆</span><div><button id="draft-resume" type="button">继续写</button><button id="draft-discard" type="button">丢弃草稿</button></div></div>
+      <section id="throwback" aria-labelledby="throwback-title"><div class="section-heading"><div class="heading-group"><span class="section-number">↺</span><h2 id="throwback-title">往年今日</h2></div><span id="throwback-caption" class="muted"></span></div><div id="throwback-list" class="throwback-list"></div></section>
       <section id="recent" aria-labelledby="recent-title">
         <div class="section-heading"><div class="heading-group"><span class="section-number">01</span><h2 id="recent-title">最近记录</h2><span id="count" class="count"></span></div><button class="text-button" data-new><i data-lucide="plus"></i>留下一段回忆</button></div>
         <div id="recent-list" class="photo-grid"></div>
       </section>
-      <section id="timeline" aria-labelledby="timeline-title"><div class="section-heading"><div class="heading-group"><span class="section-number">02</span><h2 id="timeline-title">时间线</h2></div><span class="muted">按日子，重温每一刻</span></div><div id="timeline-list"></div></section>
+      <section id="timeline" aria-labelledby="timeline-title"><div class="section-heading"><div class="heading-group"><span class="section-number">02</span><h2 id="timeline-title">时间线</h2></div><span id="filter-count" class="muted" role="status"></span></div>
+        <div class="search-tools"><div class="search-field"><label for="search">搜索回忆</label><input id="search" type="search" placeholder="搜文字、地点或标签"></div><div><label for="month-filter">月份</label><input id="month-filter" type="month"></div><div><label for="tag-filter">标签</label><select id="tag-filter"><option value="">全部标签</option></select></div><label class="favorite-filter"><input id="favorite-filter" type="checkbox">只看收藏</label><button id="clear-filters" type="button">重置</button></div>
+        <div id="timeline-list"></div>
+      </section>
+      <section id="calendar" aria-labelledby="calendar-title"><div class="section-heading"><div class="heading-group"><span class="section-number">03</span><h2 id="calendar-title">回忆日历</h2></div><div class="calendar-controls"><button id="calendar-prev" aria-label="上个月">‹</button><input id="calendar-month" type="month" aria-label="日历月份"><button id="calendar-next" aria-label="下个月">›</button><button id="calendar-today">本月</button></div></div><div class="calendar-layout"><div><div class="weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div><div id="calendar-grid" class="calendar-grid" role="group" aria-label="选择日期"></div></div><div class="day-panel"><h3 id="day-title">选择一天，翻开回忆</h3><div id="day-list" aria-live="polite"></div></div></div></section>
       <section id="footprints" aria-labelledby="footprints-title"><div class="section-heading"><div class="heading-group"><span class="section-number">03</span><h2 id="footprints-title">足迹地图</h2></div><span id="place-count" class="count"></span></div><div class="map-layout"><div><div id="map" aria-label="记录地点地图"><div class="map-placeholder"><i data-lucide="map"></i><span>足迹正在展开</span></div></div><p id="map-status" class="muted" role="status">地图加载中</p></div><div class="places"><label for="place-filter">走过的地方</label><select id="place-filter"><option value="">全部地点</option></select><div id="place-list"></div></div></div></section>
       <footer><span>Memory Book <span class="footer-dot">·</span> 记忆册</span><span>把小小的日常，留成久久的回忆。</span></footer>
     </main>
@@ -43,11 +51,14 @@
     <form id="entry-form"><div class="section-heading"><div><p class="eyebrow">留住这一刻</p><h2 id="editor-title">记一笔</h2></div><button type="button" id="cancel" class="icon-button" aria-label="关闭" title="关闭"><i data-lucide="x"></i></button></div>
       <label for="photos">照片 <span class="muted">最多 3 张 · 每张不超过 15 MB</span></label><input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple><div id="preview"></div>
       <label for="words">今天的故事</label><textarea id="words" maxlength="2000" rows="4" required placeholder="今天有什么值得留下？"></textarea>
+      <label for="tags">标签 <span class="muted">用逗号分隔，最多 10 个，每个 24 字</span></label><input id="tags" maxlength="249" placeholder="例如：旅行，朋友，值得记住"><label class="favorite-filter"><input id="favorite" type="checkbox">收藏这段回忆</label><p id="draft-status" class="muted" role="status"></p>
       <div class="fields"><div><label for="date">日期</label><input id="date" type="date" required></div><div><label for="place">地点</label><select id="place" required><option value="">选择省份或城市</option></select></div></div>
       <label for="spot">具体地点 <span class="muted">选填</span></label><input id="spot" maxlength="100" placeholder="例如：西湖边的小咖啡馆"><p id="form-error" role="alert"></p><div class="form-actions"><button type="button" id="delete" class="danger" hidden><i data-lucide="trash-2"></i>删除记录</button><button type="submit" class="primary" id="save"><i data-lucide="check"></i>保存回忆</button></div>
     </form>
   </dialog>
   <script src="./assets/js/lucide.min.js"></script>
+  <script src="./assets/js/supabase.min.js"></script>
+  <script src="./assets/js/supabase-config.js"></script>
   <script src="./assets/js/record-store.js"></script>
   <script src="./assets/js/journal.js"></script>
 </body>

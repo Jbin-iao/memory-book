@@ -26,7 +26,10 @@ jobs:
         with:
           node-version: '24'
       - run: node tests/record-store.test.cjs
+      - run: node tests/sync.test.cjs
       - run: node --check assets/js/journal.js
+      - run: node --check assets/js/record-store.js
+      - run: node --check assets/js/modern-auth.js
       - run: node scripts/build.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

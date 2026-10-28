@@ -3,8 +3,11 @@
 Live site: https://jbin-iao.github.io/memory-book/
 
 A personal memory journal with photos, a timeline and a province-level map.
-Records stay in the current browser. There is no account system or cloud sync.
+Supabase provides account login and cloud sync; signed-out use falls back to the current browser.
 JSON export/import includes photos and can transfer records between devices.
+Search, tags, favorites, a monthly calendar, On This Day memories, and local draft recovery are available.
+Cloud sync uses three-way merging and preserves conflicting edits; accounts have separate local storage.
+See [upgrade notes](docs/UPGRADE.md) for migration behavior and verification.
 Clearing browser data removes local records; export a backup regularly.
 
 ## Preview
@@ -13,6 +16,7 @@ Requires Node.js 24. No package installation is needed.
 
 ```sh
 node tests/record-store.test.cjs
+node tests/sync.test.cjs
 node scripts/build.mjs
 node scripts/preview.mjs
 ```
@@ -29,6 +33,9 @@ When working in the original mixed project folder, run
 `node scripts/prepare-release.mjs` and commit/push from `.publish/memory-book/`.
 That directory contains only the approved source files, not private exports or
 obsolete pages. See [release notes](docs/RELEASE.md).
+
+For Supabase setup, database RLS, auth redirects and China network checks, see
+[SUPABASE_SETUP.md](SUPABASE_SETUP.md).
 
 ## Assets
 

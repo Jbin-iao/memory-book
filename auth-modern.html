@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 | 心动档案馆</title>
+  <link rel="stylesheet" href="./assets/css/modern-auth.css">
+</head>
+<body class="modern-auth-page">
+  <!-- 背景装饰 -->
+  <div class="auth-bg">
+    <div class="auth-gradient"></div>
+    <div class="auth-particles"></div>
+  </div>
+
+  <!-- 返回按钮 -->
+  <a href="./love-story.html" class="auth-back-btn">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>返回首页</span>
+  </a>
+
+  <!-- 主内容区 -->
+  <main class="auth-container">
+    <div class="auth-content">
+      <!-- 左侧：品牌区 -->
+      <div class="auth-brand">
+        <div class="brand-logo">
+          <div class="logo-icon">❤️</div>
+          <h1>心动档案馆</h1>
+        </div>
+        <p class="brand-tagline">记录每一个心动瞬间</p>
+        <div class="brand-features">
+          <div class="feature-item">
+            <div class="feature-icon">☁️</div>
+            <div class="feature-text">
+              <h3>云端同步</h3>
+              <p>数据安全备份，永不丢失</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-text">
+              <h3>隐私保护</h3>
+              <p>专属于你们的私密空间</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div class="feature-text">
+              <h3>多端访问</h3>
+              <p>随时随地查看回忆</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧：登录表单 -->
+      <div class="auth-form-wrapper">
+        <div class="auth-card">
+          <!-- 已登录状态 -->
+          <div id="auth-signed-state" class="auth-signed-state" hidden>
+            <div class="success-icon">✓</div>
+            <h2>欢迎回来</h2>
+            <p id="auth-user-email" class="user-email"></p>
+            <p class="auth-hint">你已登录，可以返回首页继续记录</p>
+            <div class="auth-actions">
+              <a href="./love-story.html" class="btn btn-primary">进入档案馆</a>
+              <button id="logout-btn" type="button" class="btn btn-ghost">退出登录</button>
+            </div>
+          </div>
+
+          <!-- 登录/注册表单 -->
+          <div id="auth-form-state" class="auth-form-state">
+            <div class="form-header">
+              <h2 id="form-title">登录账号</h2>
+              <p id="form-subtitle">登录后数据将自动同步到云端</p>
+            </div>
+
+            <!-- 切换标签 -->
+            <div class="auth-tabs">
+              <button id="tab-login" type="button" class="auth-tab active" data-mode="login">
+                登录
+              </button>
+              <button id="tab-signup" type="button" class="auth-tab" data-mode="signup">
+                注册
+              </button>
+              <div class="tab-indicator"></div>
+            </div>
+
+            <!-- 表单 -->
+            <form id="auth-form" class="auth-form">
+              <div class="form-group">
+                <label for="email">邮箱地址</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3.33334 5.83333L10 10.8333L16.6667 5.83333M3.33334 5H16.6667C17.1269 5 17.5 5.3731 17.5 5.83333V14.1667C17.5 14.6269 17.1269 15 16.6667 15H3.33334C2.8731 15 2.5 14.6269 2.5 14.1667V5.83333C2.5 5.3731 2.8731 5 3.33334 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password">密码</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8333 9.16667H4.16667C3.24619 9.16667 2.5 9.91286 2.5 10.8333V16.6667C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6667V10.8333C17.5 9.91286 16.7538 9.16667 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.83334 9.16667V5.83333C5.83334 4.72826 6.27232 3.66846 7.05372 2.88706C7.83512 2.10565 8.89493 1.66667 10 1.66667C11.1051 1.66667 12.1649 2.10565 12.9463 2.88706C13.7277 3.66846 14.1667 4.72826 14.1667 5.83333V9.16667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="至少6位字符"
+                    autocomplete="current-password"
+                    minlength="6"
+                    required
+                  >
+                  <button type="button" class="toggle-password" aria-label="显示密码">
+                    <svg class="eye-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M1.66666 10C1.66666 10 4.16666 4.16667 10 4.16667C15.8333 4.16667 18.3333 10 18.3333 10C18.3333 10 15.8333 15.8333 10 15.8333C4.16666 15.8333 1.66666 10 1.66666 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="password-strength" id="password-strength" hidden>
+                  <div class="strength-bar">
+                    <div class="strength-fill"></div>
+                  </div>
+                  <span class="strength-text"></span>
+                </div>
+              </div>
+
+              <!-- 注册时的确认密码 -->
+              <div class="form-group" id="confirm-password-group" hidden>
+                <label for="confirm-password">确认密码</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8333 9.16667H4.16667C3.24619 9.16667 2.5 9.91286 2.5 10.8333V16.6667C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6667V10.8333C17.5 9.91286 16.7538 9.16667 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 13.3333V14.1667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="再次输入密码"
+                    autocomplete="new-password"
+                    minlength="6"
+                  >
+                </div>
+              </div>
+
+              <!-- 提交按钮 -->
+              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
+                <span class="btn-text">登录</span>
+                <span class="btn-loader" hidden>
+                  <svg class="spinner" width="20" height="20" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="80" stroke-dashoffset="60"/>
+                  </svg>
+                </span>
+              </button>
+
+              <!-- 消息提示 -->
+              <div id="auth-message" class="auth-message" hidden></div>
+            </form>
+
+            <!-- 额外选项 -->
+            <div class="auth-footer">
+              <p class="footer-text">
+                <span id="footer-question">还没有账号？</span>
+                <button type="button" id="footer-switch" class="link-btn">立即注册</button>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 装饰元素 -->
+        <div class="form-decoration">
+          <div class="deco-circle deco-1"></div>
+          <div class="deco-circle deco-2"></div>
+          <div class="deco-circle deco-3"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 脚本 -->
+  <script src="./assets/js/supabase.min.js"></script>
+  <script src="./assets/js/supabase-config.js"></script>
+  <script src="./assets/js/modern-auth.js"></script>
+</body>
+</html>

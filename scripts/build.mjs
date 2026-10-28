@@ -5,9 +5,10 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = resolve(root, 'dist');
 const files = [
-  'love-story.html', 'map-memory.html',
+  'love-story.html', 'map-memory.html', 'auth-modern.html',
   'assets/book-open.svg', 'assets/memory-cover.jpg', 'assets/china-regions.json',
-  'assets/css/journal.css', 'assets/js/journal.js', 'assets/js/record-store.js',
+  'assets/css/journal.css', 'assets/css/modern-auth.css', 'assets/js/journal.js', 'assets/js/record-store.js', 'assets/js/modern-auth.js',
+  'assets/js/supabase.min.js', 'assets/js/supabase-config.js',
   'assets/js/lucide.min.js', 'assets/js/echarts.min.js'
 ];
 
